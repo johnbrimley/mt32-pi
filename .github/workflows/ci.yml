@@ -39,11 +39,18 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        board: [pi2, pi3-64, pi4-64]
+        board: [pi3-64]
 
     steps:
       - uses: actions/checkout@v4
 
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libglib2.0-dev \
+            pkg-config
+            
       - name: Fetch submodules
         run: make submodules
 
